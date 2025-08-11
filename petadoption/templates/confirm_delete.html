@@ -1,0 +1,26 @@
+
+
+{% extends 'base.html'%}
+ {% load static %}
+
+{% block title %}
+Confirm Deletion
+{% endblock %}
+   
+    {% block link %}
+        <link rel="stylesheet" href="{% static 'confirmdelete.css' %}">
+    {% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <h1>Are you sure you want to delete {{ pet.pet_name }}?</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Yes, Delete</button>
+            <button type="pet" class="btn">Cancel</button>
+        </form>
+
+    </div>
+    {% endblock %}

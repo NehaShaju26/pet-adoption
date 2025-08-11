@@ -1,0 +1,42 @@
+{% extends 'base.html'%}
+ {% load static %}
+
+{% block title %}
+All Pets
+{% endblock %}
+   
+    {% block link %}
+        <link rel="stylesheet" href="{% static 'listpets.css' %}">
+    {% endblock %}
+
+
+{% block content %}
+    
+
+
+    <div class="container">
+        <h1>ALL PETS</h1>
+
+        {% if pets %}
+            <div class="pet-list">
+                {% for pet in pets %}
+                    <a href="{% url 'pet_details' pet.id %}" class="pet-card-link" style="text-decoration: none;">
+                        <div class="pet-card">
+                            <div class="pet-image">
+                                <img src="{{ pet.pet_image.url }}" alt="{{ pet.pet_name }}" class="img-fluid">
+                            </div>
+                            <div class="pet-info">
+                                <h3>{{ pet.pet_name }}</h3>
+                                <p><strong>Breed:</strong> {{ pet.pet_breed }}</p>
+                                <p><strong>Age:</strong> {{ pet.pet_age }} years</p>
+                                <p><strong>Description:</strong> {{ pet.pet_description|truncatewords:20 }}</p>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-pets-message">No pets found in the database.</p>
+        {% endif %}
+    </div>
+{% endblock %}

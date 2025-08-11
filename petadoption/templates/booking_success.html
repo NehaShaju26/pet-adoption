@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+ {% load static %}
+
+{% block title %}
+Booking Successful
+{% endblock %}
+   
+    {% block link %}
+        <link rel="stylesheet" href="{% static 'success.css' %}">
+    {% endblock %}
+
+
+{% block content %}
+    
+    <div class="message-container">
+        <h2>Booking Successful</h2>
+
+        {% if is_free_adoption %}
+            <p>Your booking for the pet <strong>{{ pet_name }}</strong> has been successfully confirmed. Thank you for adopting!</p>
+        {% else %}
+            <p>Your booking for the pet <strong>{{ pet_name }}</strong> has been successfully confirmed. Please proceed with the payment to complete your booking.</p>
+        {% endif %}
+
+        <a href="{% url 'home' %}">Go back to Home</a>
+    </div>
+    {% endblock %}
+

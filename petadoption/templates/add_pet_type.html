@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+ {% load static %}
+
+{% block title %}
+Add Pet Type
+{% endblock %}
+   
+    {% block link %}
+       <link rel="stylesheet" href="{% static 'addpettype.css' %}">
+    {% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+        <h1>Add New Pet Type</h1>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="name">Pet Type Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <button type="submit">Add Pet Type</button>
+        </form>
+        {% if messages %}
+        <div class="alert">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    </div>
+    
+{% endblock %}

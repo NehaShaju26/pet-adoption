@@ -1,0 +1,102 @@
+{% extends 'base.html'%}
+ {% load static %}
+
+{% block title %}
+Add New Pet
+{% endblock %}
+   
+    {% block link %}
+
+    {% endblock %}
+
+
+{% block content %}
+   
+
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="card shadow w-100" style="max-width: 900px; margin-top: 70px;">
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0"><strong>ADD NEW PET</strong></h4>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row g-3">
+                    <!-- Left Column -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="pet_name">Pet Name</label>
+                            <input type="text" id="pet_name" name="pet_name" class="form-control" required value="{{ form.pet_name.value|default:'' }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pet_age">Pet Age</label>
+                            <input type="number" id="pet_age" name="pet_age" class="form-control" min="0" required value="{{ form.pet_age.value|default:'' }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pet_price">Pet Price</label>
+                            <input type="number" id="pet_price" name="pet_price" class="form-control" min="0" value="{{ form.pet_price.value|default:'' }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pet_breed">Pet Breed</label>
+                            <input type="text" id="pet_breed" name="pet_breed" class="form-control" value="{{ form.pet_breed.value|default:'' }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Adoption Type</label>
+                            <select id="category" name="category" class="form-select" required>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}" {% if category.id == form.category.value %}selected{% endif %}>{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="pet_description">Pet Description</label>
+                            <textarea id="pet_description" name="pet_description" class="form-control" rows="5" required>{{ form.pet_description.value|default:'' }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pet_type">Pet Type</label>
+                            <select id="pet_type" name="pet_type" class="form-select" required>
+                                {% for pet_type in pet_types %}
+                                    <option value="{{ pet_type.id }}" {% if pet_type.id == form.pet_type.value %}selected{% endif %}>{{ pet_type.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pet_image">Pet Image</label>
+                            <input type="file" id="pet_image" name="pet_image" class="form-control" accept="image/*" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Select Address</label>
+                            <select name="address" id="address" class="form-select" required>
+                                {% for address in addresses %}
+                                    <option value="{{ address.id }}" {% if address.id == form.address.value %}selected{% endif %}>{{ address.name }}, {{ address.building_no }} - {{ address.street }}</option>
+                                {% empty %}
+                                    <option value="">No addresses available</option>
+                                {% endfor %}
+                            </select>
+                            <div class="mt-1">
+                                <a href="{% url 'add_address' %}" class="btn btn-link px-0">Add Address +</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary px-5">Add Pet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

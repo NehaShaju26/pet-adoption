@@ -1,0 +1,35 @@
+
+{% extends 'base.html'%}
+ {% load static %}
+{% block title %}
+Home
+{% endblock %}
+   {% block link %}
+   <link rel="stylesheet" href="{% static 'userhomee.css' %}">
+    {% endblock %}
+
+{% block content %}
+   
+        
+    <div class="container-fluid">
+        <div class="card-deck " style="margin-top: 50px;">
+            {% for category in categories %}
+            <div class="card">
+                
+                <a href="{% url 'pets_by_category' category.id%}" style="text-decoration: none;">
+                    
+                <img src="{{category.pet_image.url}}" alt="Card Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{category.name}}</h5>
+                   
+                </div>
+            </div>
+                </a>
+                {% endfor %}
+            
+        </div>
+    </div>
+    
+    
+
+ {% endblock %}

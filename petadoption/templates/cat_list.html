@@ -1,0 +1,21 @@
+
+{% extends 'base.html'%}
+ {% load static %}
+
+{% block title %}
+Pet Categories
+{% endblock %}
+   
+ {% block content %}
+  
+    <h1>Pet Categories</h1>
+    <ul>
+        {% for category in categories %}
+            <li>
+                <a href="{% url 'pets_by_category' category.id %}">{{ category.name }}</a>
+            </li>
+        {% empty %}
+            <li>No categories available.</li>
+        {% endfor %}
+    </ul>
+  {% endblock %}

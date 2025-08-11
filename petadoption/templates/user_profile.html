@@ -1,0 +1,42 @@
+{% extends 'base.html'%}
+ {% load static %}
+
+{% block title %}
+{{ user.username }}'s Profile
+{% endblock %}
+   
+    
+
+
+{% block content %}
+   
+
+    <div class="container my-5">
+        <h1 class="text-center mb-4">{{ user }}'s Profile</h1>
+        <div class="text-center">
+            <img src="../../static/images/default_profile_image.png" 
+            alt="dp" class="profile-img rounded-circle" style="width: 150px; height: 150px;">
+            <!-- <h3>{{ user.username }}</h3> -->
+        </div>
+
+        <div class="mt-4">
+            <h3 class="mb-3">Pets Added by {{ user.first_name }}</h3>
+            <div class="row">
+                {% for pet in pets %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="{{ pet.pet_image.url }}" class="card-img-top" alt="{{ pet.pet_name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ pet.pet_name }}</h5>
+                                <p class="card-text"><strong>Breed:</strong> {{ pet.pet_breed }}</p>
+                                <a href="{% url 'pet_details' pet.id %}" class="btn btn-primary">View Pet</a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No pets added yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
